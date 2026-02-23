@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File QR Scanner</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>&#x1F4F7; File QR Scanner</h1>
+      <p>Upload a PDF or image file to detect QR codes</p>
+    </header>
+
+    <!-- Upload Section -->
+    <section id="upload-section">
+      <div id="drop-zone" class="drop-zone" role="button" tabindex="0" aria-label="File drop zone">
+        <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <p class="drop-title">Drag &amp; drop your file here</p>
+        <p class="drop-sub">or</p>
+        <label for="file-input" class="btn btn-primary">Choose File</label>
+        <input type="file" id="file-input" accept=".pdf,image/*" aria-label="Upload PDF or image" />
+        <p class="supported-formats">Supported: PDF, PNG, JPG, GIF, BMP, WebP</p>
+      </div>
+    </section>
+
+    <!-- Viewer Section -->
+    <section id="viewer-section" class="hidden">
+      <div id="toolbar">
+        <div class="toolbar-left">
+          <button id="prev-page" class="btn btn-icon" disabled title="Previous page">&#8592;</button>
+          <span id="page-info" class="page-info"></span>
+          <button id="next-page" class="btn btn-icon" disabled title="Next page">&#8594;</button>
+        </div>
+        <div class="toolbar-right">
+          <button id="scan-all-btn" class="btn btn-secondary hidden">Scan All Pages</button>
+          <button id="clear-selection-btn" class="btn btn-secondary">Clear Selection</button>
+          <button id="scan-selection-btn" class="btn btn-primary" disabled>Scan Selection</button>
+          <button id="reset-btn" class="btn btn-ghost">&#8617; New File</button>
+        </div>
+      </div>
+
+      <p id="hint" class="hint">Click and drag on the image to select an area to scan</p>
+
+      <div id="canvas-wrapper">
+        <div id="canvas-container">
+          <canvas id="main-canvas"></canvas>
+          <canvas id="overlay-canvas" aria-label="Selection overlay"></canvas>
+        </div>
+        <div id="scanning-overlay" class="hidden">
+          <div class="spinner"></div>
+          <span>Scanning&hellip;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results-section" class="hidden">
+      <h2>QR Code Results</h2>
+      <div id="results-list"></div>
+      <div class="results-actions">
+        <button id="back-btn" class="btn btn-secondary">&#8617; Back to Viewer</button>
+        <button id="new-file-btn" class="btn btn-ghost">Upload New File</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- PDF.js (local vendor copy) -->
+  <script src="vendor/pdf.min.js"></script>
+  <!-- jsQR (local vendor copy) -->
+  <script src="vendor/jsQR.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
